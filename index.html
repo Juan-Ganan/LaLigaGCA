@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Liga GCA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+  <!-- Encabezado -->
+  <header class="flex justify-between items-center p-6 bg-blue-700 text-white">
+    <h1 class="text-2xl font-bold">Liga GCA</h1>
+    <a href="/dashboard.html" class="bg-white text-blue-700 px-4 py-2 rounded hover:bg-gray-100">GCA</a>
+  </header>
+
+  <!-- Presentación -->
+  <section class="text-center py-8 bg-white shadow-md">
+    <h2 class="text-3xl font-semibold mb-4">Bienvenidos a la Liga GCA</h2>
+  </section>
+
+  <!-- Contenedor principal -->
+  <main class="flex h-[calc(100vh-160px)] p-4 gap-4">
+    
+    <!-- Carrusel -->
+    <section class="relative w-[40%] h-full rounded-xl shadow-lg overflow-hidden">
+      <div id="carousel" class="flex h-full transition-transform duration-700">
+        <!-- Slides -->
+        <div class="min-w-full flex flex-col items-center justify-center bg-white p-8">
+          <img src="Imagenes/Eduardo.jpeg" class="carousel-img" alt="Equipo Eduardo">
+          <h3 class="text-xl font-bold">Manchester United</h3>
+          <p class="text-center">Dt: Eduardo</p>
+        </div>
+        <div class="min-w-full flex flex-col items-center justify-center bg-white p-8">
+          <img src="Imagenes/Cubo.jpeg" class="carousel-img" alt="Equipo Cubo">
+          <h3 class="text-xl font-bold">Barcelona FC</h3>
+          <p class="text-center">Dt: Felipe (Cubo)</p>
+          <p class="text-center">Equipo reconocido por debutar rn las inferiores.</p>
+        </div>
+        <div class="min-w-full flex flex-col items-center justify-center bg-white p-8">
+          <img src="Imagenes/Angel.jpeg" class="carousel-img" alt="Equipo Ángel">
+          <h3 class="text-xl font-bold">Liverpool FC</h3>
+          <p class="text-center">Dt: Ángel</p>
+        </div>
+        <div class="min-w-full flex flex-col items-center justify-center bg-white p-8">
+          <img src="Imagenes/Mariana.jpeg" class="carousel-img" alt="Equipo Mariana">
+          <h3 class="text-xl font-bold">Millonarios FC</h3>
+          <p class="text-center">Dt: Mariana</p>
+        </div>
+        <div class="min-w-full flex flex-col items-center justify-center bg-white p-8">
+          <img src="Imagenes/Mauro.jpeg" class="carousel-img" alt="Equipo Mauro">
+          <h3 class="text-xl font-bold">Borussia Dortmund</h3>
+          <p class="text-center">Dt: Mauricio</p>
+        </div>
+        <div class="min-w-full flex flex-col items-center justify-center bg-white p-8">
+          <img src="Imagenes/JuanDa.jpeg" class="carousel-img" alt="Equipo JuanDa">
+          <h3 class="text-xl font-bold">Real Madrid FC</h3>
+          <p class="text-center">Dt: JuanDa</p>
+        </div>
+        <div class="min-w-full flex flex-col items-center justify-center bg-white p-8">
+          <img src="Imagenes/Jose.jpeg" class="carousel-img" alt="Equipo Jose">
+          <h3 class="text-xl font-bold">Bayern de Múnich</h3>
+          <p class="text-center">Dt: Jose (Tarde)</p>
+        </div>
+      </div>
+
+      <!-- Controles -->
+      <button onclick="prev()" class="carousel-btn left-0">&#8592;</button>
+      <button onclick="next()" class="carousel-btn right-0">&#8594;</button>
+    </section>
+
+    <!-- Tabla de posiciones -->
+<section class="w-[60%] bg-white p-6 rounded shadow-md overflow-auto">
+    <h2 class="text-2xl font-bold mb-4 text-center">Tabla de Posiciones</h2>
+    <table class="w-full table-auto border-collapse">
+      <thead>
+        <tr class="bg-blue-100">
+          <th class="border px-4 py-2">Posición</th>
+          <th class="border px-4 py-2">Equipo</th>
+          <th class="border px-4 py-2">Puntos</th>
+        </tr>
+      </thead>
+      <tbody id="tabla-posiciones">
+        <tr><td colspan="3" class="text-center py-4">Cargando datos...</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
