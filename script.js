@@ -30,33 +30,59 @@ async function cargarCSV(url) {
   const filas = data.trim().split("\n");
 
   return filas.map(linea => {
-    const [nombre, puntos, asistencias] = linea.split(",");
+    const [nombre, puntos, asistencias, PartidosJugados] = linea.split(",");
     return {
       nombre: nombre.trim(),
       puntos: parseInt(puntos.trim(), 10),
-      asistencias: parseInt(asistencias?.trim() || "0", 10) // Manejo defensivo
+      asistencias: parseInt(asistencias?.trim() || "0", 10),
+      PartidosJugados: parseInt(PartidosJugados?.trim()) // Manejo defensivo
     };
   });
 }
 
 function mostrarTabla(equipos) {
-  const tbody = document.getElementById("tabla-posiciones");
-  equipos.sort((a, b) => b.puntos - a.puntos); // Orden descendente
-
-  tbody.innerHTML = "";
-
-  equipos.forEach((equipo, index) => {
-    const fila = document.createElement("tr");
-    fila.innerHTML = `
-      <td class="border px-4 py-2 text-center align-middle">${index + 1}</td>
-      <td class="border px-4 py-2 text-center align-middle">${equipo.nombre}</td>
-      <td class="border px-4 py-2 text-center align-middle">${equipo.puntos}</td>
-      <td class="border px-4 py-2 text-center align-middle">${equipo.asistencias}</td>
-    `;
-    tbody.appendChild(fila);
-  });
-}
-
+    const tbody = document.getElementById("tabla-posiciones");
+  
+    // Calcular puntaje total con asistencias valiendo 0.5 puntos
+    equipos.forEach(equipo => {
+      equipo.puntajeTotal = equipo.puntos + equipo.asistencias * 0.5;
+    });
+  
+    // Ordenar por puntaje total descendente
+    equipos.sort((a, b) => b.puntajeTotal - a.puntajeTotal);
+  
+    tbody.innerHTML = "";
+  
+    // Agregar encabezado si quieres incluir el puntaje total visible
+    const thead = document.querySelector("#tabla-posiciones").previousElementSibling;
+    if (thead && thead.tagName === "THEAD") {
+      thead.innerHTML = `
+        <tr>
+          <th class="border px-4 py-2 text-center">#</th>
+          <th class="border px-4 py-2 text-center">Equipo</th>
+          <th class="border px-4 py-2 text-center">Puntos</th>
+          <th class="border px-4 py-2 text-center">Asistencias</th>
+          <th class="border px-4 py-2 text-center">PJ</th>
+          <th class="border px-4 py-2 text-center">Puntaje Total</th>
+        </tr>
+      `;
+    }
+  
+    equipos.forEach((equipo, index) => {
+      const fila = document.createElement("tr");
+      fila.innerHTML = `
+        <td class="border px-4 py-2 text-center align-middle">${index + 1}</td>
+        <td class="border px-4 py-2 text-center align-middle">${equipo.nombre}</td>
+        <td class="border px-4 py-2 text-center align-middle">${equipo.puntos}</td>
+        <td class="border px-4 py-2 text-center align-middle">${equipo.asistencias}</td>
+        <td class="border px-4 py-2 text-center align-middle">${equipo.PartidosJugados}</td>
+        <td class="border px-4 py-2 text-center align-middle">${equipo.puntajeTotal.toFixed(1)}</td>
+      `;
+      tbody.appendChild(fila);
+    });
+  }
+  
+  
 // -------------------------------
 // Inicialización al cargar la página
 // -------------------------------
